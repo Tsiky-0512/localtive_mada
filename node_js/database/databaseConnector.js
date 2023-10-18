@@ -4,7 +4,7 @@ mongoose.Promise = global.Promise;
 //mongoose.set('debug', true);
 
 // remplacer toute cette chaine par l'URI de connexion à votre propre base dans le cloud s
-const uri = dbConfig.url;
+const uri = dbConfig.url_prod;
 
 const options = {
     useNewUrlParser: true,
