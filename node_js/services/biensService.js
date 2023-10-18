@@ -23,8 +23,8 @@ function updateBiens(bienId, bienBody,userId) {
     return new Promise((resolve, reject) => {
         Biens.findOneAndUpdate({ $and : [ {_id: bienId} ,{proprietaireId: userId}  ]  }, bienBody, { new: true }, (err) => {
             if (err) {
-                console.log(err);
                 reject(err);
+                return;
             }
             resolve(`Bien ${bienId} modifié`);
         });
@@ -38,8 +38,11 @@ function deleteBien(id) {
         Biens.findByIdAndRemove(id, (err, bien) => {
             if (err) {
                 reject(err);
+            }else if (bien) {
+                resolve(`${bien.adressePostale} deleted`);
+            }else{
+                reject(`Element not found!`);
             }
-            resolve(`${bien.adressePostale} deleted`);
         })
     })
 }

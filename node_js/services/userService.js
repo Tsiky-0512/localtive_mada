@@ -16,7 +16,7 @@ const encryptPassword = (password) => {
 const comparePasswordEncrypted = (inputPassword, databasePassword) => {
     return new Promise((resolve, reject) => {
         bcrypt.compare(inputPassword, databasePassword).then((valid) => {
-            if (!valid) {
+            if (valid) {
                 resolve(true);
             }
             resolve(false);
@@ -56,8 +56,7 @@ const checkPasswordUser = async (user) => {
                     reject('User non trouvé');
                     return;
                 }
-                const userPasswordEncrypted = await encryptPassword(user.password);
-                const resultCheck = await comparePasswordEncrypted(userPasswordEncrypted, userBase.password);
+                const resultCheck = await comparePasswordEncrypted(user.password, userBase.password);
                 if (resultCheck) {
                     console.log("userBase._id :",userBase._id);
                     const res = {

@@ -1,9 +1,12 @@
 const mongoose = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
+var aggregatePaginate = require("mongoose-aggregate-paginate-v2");
+
 const Schema = mongoose.Schema;
 
 const locataireSchema = Schema({
     //Unique id created automatically by the mongoose
+    userId: { type: String, required: true },
     nom: { type: String, required: true },
     prenom: { type: String, required: true },
     email: { 
@@ -22,4 +25,5 @@ const locataireSchema = Schema({
 });
 
 locataireSchema.plugin(uniqueValidator);
+locataireSchema.plugin(aggregatePaginate);
 module.exports = mongoose.model("Locataire", locataireSchema);

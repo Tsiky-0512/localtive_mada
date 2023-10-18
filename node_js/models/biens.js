@@ -12,5 +12,5 @@ const biensSchema = Schema({
 
 biensSchema.plugin(aggregatePaginate);
 
-
 module.exports = mongoose.model("Biens", biensSchema);
+

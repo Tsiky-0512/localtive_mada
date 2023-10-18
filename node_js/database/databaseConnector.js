@@ -1,10 +1,12 @@
 const mongoose = require("mongoose");
 const dbConfig = require("./database.config");
+const { isProd } = require("../application.properties");
+
 mongoose.Promise = global.Promise;
 //mongoose.set('debug', true);
 
 // remplacer toute cette chaine par l'URI de connexion à votre propre base dans le cloud s
-const uri = dbConfig.url_prod;
+const uri = isProd ? dbConfig.url_prod : dbConfig.url;
 
 const options = {
     useNewUrlParser: true,

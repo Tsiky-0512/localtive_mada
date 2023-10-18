@@ -1,35 +1,38 @@
 let Locataires = require('../models/locataires');
 
 
-// Ajout d'un locataire (POST)
-function saveLocataire(locataireBody) {
+// Ajout d'un Locataire (POST)
+function saveLocataire(locataireBody, userId) {
     let locataire = new Locataires();
+    locataire.adressePostale = locataireBody.adressePostale;
+    locataire.telephone = locataireBody.telephone;
     locataire.nom = locataireBody.nom;
     locataire.prenom = locataireBody.prenom;
     locataire.email = locataireBody.email;
-    locataire.adressePostale = locataireBody.adressePostale;
-    locataire.telephone = locataireBody.telephone;
+    locataire.userId = userId;
     return new Promise((resolve, reject) => {
         locataire.save((err) => {
             if (err) {
-                reject(`cannot save locataires ${err}`,);
+                reject(`cannot save Locataires ${err}`,);
             }
-            resolve(`${locataire.email} saved!`);
+            resolve(`${locataire.adressePostale} saved!`);
         });
     })
 }
 
 // Update d'un locataire (PUT)
-function updateLocataires(locataireId, locataireBody) {
+function updateLocataires(locataireId, locataireBody,userId) {
     return new Promise((resolve, reject) => {
-        Locataires.findByIdAndUpdate({ _id: locataireId }, locataireBody, { new: true }, (err) => {
+        Locataires.findOneAndUpdate({ $and : [ {_id: locataireId} ,{userId: userId}  ]  }, locataireBody, { new: true }, (err) => {
             if (err) {
-                reject(err)
+                reject(err);
+                return;
             }
             resolve(`Locataire ${locataireId} modifié`);
         });
     })
 }
+
 
 // suppression d'un locataire (DELETE)
 function deleteLocataire(id) {
@@ -37,24 +40,35 @@ function deleteLocataire(id) {
         Locataires.findByIdAndRemove(id, (err, locataire) => {
             if (err) {
                 reject(err);
+            }else if (locataire) {
+                resolve(`${locataire.adressePostale} deleted`);
+            }else{
+                reject(`Element not found!`);
             }
-            resolve(`${locataire.email} deleted`);
         })
     })
 }
 
 // Récupérer tous les locataires (GET)
-function getLocatairesPaginate(page, limit) {
-    var aggregateQuery = Locataires.aggregate();
+function getLocatairesPaginate(page, limit,userId) {
+    console.log("USER ID",userId);
+    var aggregateQuery = Locataires.aggregate([
+        {
+            $match: { userId: userId },
+        }
+    ]);
+    console.log("USER ID",userId);
+
     return new Promise((resolve, reject) => {
         Locataires.aggregatePaginate(aggregateQuery,
             {
-                page: page || 1,
-                limit: limit || 10,
+                page: parseInt(page) || 1,
+                limit: parseInt(limit) || 10,
             },
             (err, locataires) => {
                 if (err) {
                     reject(err);
+                    console.log(err);
                 }
                 resolve(locataires);
             }
@@ -63,9 +77,9 @@ function getLocatairesPaginate(page, limit) {
 }
 
 // Récupérer un locataire par son id (GET)
-function getLocataireById(locataireId) {
+function getLocataireById(locataireId,userId) {
     return new Promise((resolve, reject) => {
-        Locataires.findOne({ _id: locataireId }, (err, locataire) => {
+        Locataires.findOne({ $and : [ {_id: locataireId} ,{proprietaireId: userId}  ]  }, (err, locataire) => {
             if (err) { reject(err) }
             resolve(locataire);
         })
@@ -74,9 +88,9 @@ function getLocataireById(locataireId) {
 
 
 // Récupérer tous les locataires (GET)
-function getLocataires() {
+function getLocataires(userId) {
     return new Promise((resolve, reject) => {
-        Locataires.find((err, locataires) => {
+        Locataires.find({ proprietaireId: userId }, (err, locataires) => {
             if (err) {
                 reject(err)
             }
@@ -84,6 +98,7 @@ function getLocataires() {
         });
     })
 }
+
 
 module.exports = { saveLocataire,updateLocataires,deleteLocataire,getLocatairesPaginate,getLocataireById,getLocataires };
 

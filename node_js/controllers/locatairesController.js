@@ -3,7 +3,7 @@ const locatairesService = require("../services/locatairesService");
 
 const getLocataires = async (req, res) => {
     try {
-        const locataires = await locatairesService.getLocataires();
+        const locataires = await locatairesService.getLocataires(req.userId);
         res.status(200).json({
             data:locataires,
             status:200
@@ -18,7 +18,7 @@ const getLocataires = async (req, res) => {
 
 const getLocataireById = async (req, res) => {
     try {
-        const locataire = await locatairesService.getLocataireById(req.params.id);
+        const locataire = await locatairesService.getLocataireById(req.params.id,req.userId);
         res.status(200).json({
             data:locataire,
             status:200
@@ -31,9 +31,26 @@ const getLocataireById = async (req, res) => {
     }
 }
 
+const getLocatairesPaginate = async (req, res) => {
+
+    try {
+        const locataires = await locatairesService.getLocatairesPaginate(req.params.page, req.params.limit,req.userId);
+        res.status(200).json({
+            data: locataires,
+            status: 200
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            data: error,
+            status: 400
+        })
+    }
+}
+
 const saveLocataire = async (req, res) => {
     try {
-        const locataire = await locatairesService.saveLocataire(req.body);
+        const locataire = await locatairesService.saveLocataire(req.body,req.userId);
         res.status(200).json({
             data:locataire,
             status:200
@@ -49,7 +66,7 @@ const saveLocataire = async (req, res) => {
 
 const updateLocataire = async (req, res) => {
     try {
-        const locataire = await locatairesService.updateLocataires(req.body._id,req.body);
+        const locataire = await locatairesService.updateLocataires(req.body._id,req.body,req.userId);
         res.status(200).json({
             data:locataire,
             status:200
@@ -81,4 +98,4 @@ const deleteLocataire = async (req,res) => {
 
 
 
-module.exports = { getLocataires ,getLocataireById, saveLocataire, updateLocataire, deleteLocataire   };
+module.exports = { getLocataires ,getLocataireById, saveLocataire, updateLocataire, deleteLocataire ,getLocatairesPaginate   };
