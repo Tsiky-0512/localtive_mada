@@ -5,36 +5,25 @@ const Schema = mongoose.Schema;
 const facturesSchema = Schema({
     dateQuittance: { type: Date, required: true},
     datePaiement: { type: Date, required: true},
-    mois: { type: String, required: true},
-    typeBien: { type: String, enum : ['maison','appartement'] , required: true },
-    loyer: { type: Number, required: true },
-    surface: { type: Number, required: true },
-    nomBailleur:{ type: String, required: true },
-    adressePostaleBailleur: { type: String, required: true },
-    emailBailleur: { 
-        type: String ,
-        required :true ,
-        validate : {
-            validator :  function (value) {
-                return /\S+@\S+\.\S+/.test(value);
-            },
-            message : 'Invalid email address'
-        }
+    mois: { type: String, required: true},   
+    bailleurId: {
+        type: Schema.Types.ObjectId,
+        ref: 'users',
+        require: true
     },
-    telephoneBailleur: { type: String, required: true },
-    emailLocataire : { 
-        type: String ,
-        required :true ,
-        validate : {
-            validator :  function (value) {
-                return /\S+@\S+\.\S+/.test(value);
-            },
-            message : 'Invalid email address'
-        }
+    locataireId: {
+        type: Schema.Types.ObjectId,
+        ref: 'locataires',
+        require: true
     },
-    nomLocataire : { type: String, required: true },
-    bailleurId: { type: String, required: true }
+    bienId:{
+        type: Schema.Types.ObjectId,
+        ref: 'Biens',
+        required: true
+    },
 });
+
+facturesSchema.index({ mois: 1, bailleurId: 1 ,locataireId: 1 ,bienId :1  }, { unique: true });
 
 facturesSchema.plugin(aggregatePaginate);
 

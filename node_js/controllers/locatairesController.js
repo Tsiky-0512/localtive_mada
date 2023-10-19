@@ -18,7 +18,6 @@ const getLocataires = async (req, res) => {
 
 const getLocataireById = async (req, res) => {
     try {
-        console.log("ATOOOOO");
         const locataire = await locatairesService.getLocataireById(req.params.id,req.userId);
         res.status(200).json({
             data:locataire,

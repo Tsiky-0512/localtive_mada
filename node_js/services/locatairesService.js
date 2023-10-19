@@ -59,16 +59,16 @@ function getLocatairesPaginate(page, limit, userId) {
         },
         {
             $lookup: {
-              from: 'biens', 
-              localField: 'adressePostale', 
-              foreignField: '_id', 
-              as: 'bien'
+                from: 'biens',
+                localField: 'adressePostale',
+                foreignField: '_id',
+                as: 'bien'
             }
-          }, {
+        }, {
             $unwind: {
-              path: '$bien'
+                path: '$bien'
             }
-          }
+        }
     ]);
 
     return new Promise((resolve, reject) => {
