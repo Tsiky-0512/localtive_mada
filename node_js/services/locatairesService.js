@@ -3,6 +3,7 @@ let Locataires = require('../models/locataires');
 
 // Ajout d'un Locataire (POST)
 function saveLocataire(locataireBody, userId) {
+    console.log("ATOOO");
     let locataire = new Locataires();
     locataire.adressePostale = locataireBody.adressePostale;
     locataire.telephone = locataireBody.telephone;
@@ -14,6 +15,7 @@ function saveLocataire(locataireBody, userId) {
         locataire.save((err) => {
             if (err) {
                 reject(`cannot save Locataires ${err}`,);
+                return;
             }
             resolve(`${locataire.adressePostale} saved!`);
         });
@@ -51,13 +53,11 @@ function deleteLocataire(id) {
 
 // Récupérer tous les locataires (GET)
 function getLocatairesPaginate(page, limit,userId) {
-    console.log("USER ID",userId);
     var aggregateQuery = Locataires.aggregate([
         {
             $match: { userId: userId },
         }
     ]);
-    console.log("USER ID",userId);
 
     return new Promise((resolve, reject) => {
         Locataires.aggregatePaginate(aggregateQuery,
@@ -79,7 +79,8 @@ function getLocatairesPaginate(page, limit,userId) {
 // Récupérer un locataire par son id (GET)
 function getLocataireById(locataireId,userId) {
     return new Promise((resolve, reject) => {
-        Locataires.findOne({ $and : [ {_id: locataireId} ,{proprietaireId: userId}  ]  }, (err, locataire) => {
+        Locataires.findOne({ $and : [ {_id: locataireId} ,{userId: userId}  ]}).populate('adressePostale').exec((err, locataire) => {
+            console.log(locataire);
             if (err) { reject(err) }
             resolve(locataire);
         })
@@ -90,7 +91,7 @@ function getLocataireById(locataireId,userId) {
 // Récupérer tous les locataires (GET)
 function getLocataires(userId) {
     return new Promise((resolve, reject) => {
-        Locataires.find({ proprietaireId: userId }, (err, locataires) => {
+        Locataires.find({ userId: userId }).populate('adressePostale').exec((err, locataires) => {
             if (err) {
                 reject(err)
             }

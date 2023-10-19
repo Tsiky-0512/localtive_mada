@@ -6,10 +6,8 @@ const authentification = (req, res, next) => {
     let userId = -1;
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, token_secret);
-    console.log("decodedToken",decodedToken);
     if (decodedToken != null) {
       userId = decodedToken.userId;
-      console.log(userId);
     }
     if (userId < 0) {
       throw "Invalid user ID";

@@ -20,7 +20,10 @@ const locataireSchema = Schema({
             message : 'Invalid email address'
         }
     },
-    adressePostale: { type: String, required: true , unique : true },
+    adressePostale: {
+        type: Schema.Types.ObjectId,
+        ref: 'Biens',
+    },
     telephone: { type: String, required: true },
 });
 

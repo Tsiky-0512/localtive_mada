@@ -7,6 +7,7 @@ const { initDatabase } = require('./database/databaseConnector');
 const biensRoutes = require('./routes/biensRoute');
 const locatairesRoutes = require('./routes/locataireRoute');
 const usersRoutes = require('./routes/userRoute');
+const facturesRoutes = require('./routes/factureRoute');
 
 // initialiser la connexion sur le base de donnée
 initDatabase();
@@ -35,6 +36,7 @@ app.get('/',(req,res) => {
 app.use(`${prefix}/biens`,biensRoutes);
 app.use(`${prefix}/locataires`,locatairesRoutes);
 app.use(`${prefix}/auth`,usersRoutes);
+app.use(`${prefix}/factures`,facturesRoutes);
 
 let port = process.env.PORT || 8010;
 
