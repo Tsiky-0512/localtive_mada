@@ -23,9 +23,9 @@ function saveLocataire(locataireBody, userId) {
 }
 
 // Update d'un locataire (PUT)
-function updateLocataires(locataireId, locataireBody,userId) {
+function updateLocataires(locataireId, locataireBody, userId) {
     return new Promise((resolve, reject) => {
-        Locataires.findOneAndUpdate({ $and : [ {_id: locataireId} ,{userId: userId}  ]  }, locataireBody, { new: true }, (err) => {
+        Locataires.findOneAndUpdate({ $and: [{ _id: locataireId }, { userId: userId }] }, locataireBody, { new: true }, (err) => {
             if (err) {
                 reject(err);
                 return;
@@ -42,9 +42,9 @@ function deleteLocataire(id) {
         Locataires.findByIdAndRemove(id, (err, locataire) => {
             if (err) {
                 reject(err);
-            }else if (locataire) {
+            } else if (locataire) {
                 resolve(`${locataire.adressePostale} deleted`);
-            }else{
+            } else {
                 reject(`Element not found!`);
             }
         })
@@ -52,11 +52,23 @@ function deleteLocataire(id) {
 }
 
 // Récupérer tous les locataires (GET)
-function getLocatairesPaginate(page, limit,userId) {
+function getLocatairesPaginate(page, limit, userId) {
     var aggregateQuery = Locataires.aggregate([
         {
             $match: { userId: userId },
-        }
+        },
+        {
+            $lookup: {
+              from: 'biens', 
+              localField: 'adressePostale', 
+              foreignField: '_id', 
+              as: 'bien'
+            }
+          }, {
+            $unwind: {
+              path: '$bien'
+            }
+          }
     ]);
 
     return new Promise((resolve, reject) => {
@@ -77,9 +89,9 @@ function getLocatairesPaginate(page, limit,userId) {
 }
 
 // Récupérer un locataire par son id (GET)
-function getLocataireById(locataireId,userId) {
+function getLocataireById(locataireId, userId) {
     return new Promise((resolve, reject) => {
-        Locataires.findOne({ $and : [ {_id: locataireId} ,{userId: userId}  ]}).populate('adressePostale').exec((err, locataire) => {
+        Locataires.findOne({ $and: [{ _id: locataireId }, { userId: userId }] }).populate('adressePostale').exec((err, locataire) => {
             console.log(locataire);
             if (err) { reject(err) }
             resolve(locataire);
@@ -101,5 +113,5 @@ function getLocataires(userId) {
 }
 
 
-module.exports = { saveLocataire,updateLocataires,deleteLocataire,getLocatairesPaginate,getLocataireById,getLocataires };
+module.exports = { saveLocataire, updateLocataires, deleteLocataire, getLocatairesPaginate, getLocataireById, getLocataires };
 
