@@ -5,6 +5,7 @@
 API URL : https://backend-locative-mada.onrender.com
 DATABASE URL : mongodb+srv://tsikyrasolofomanana:iUsCg7XGLfEfKlyp@cluster0.ht07nsu.mongodb.net/
 NODE VERSION : 16.15.1
+Cloud Application : render.com
 
 ## Architecture
 
