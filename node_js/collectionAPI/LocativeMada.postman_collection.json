@@ -1,0 +1,643 @@
+{
+	"info": {
+		"_postman_id": "b5c6ee37-ff67-46b4-8906-97a3f0ffa4b1",
+		"name": "LocativeMada",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14306419",
+		"_collection_link": "https://lunar-equinox-615721-1.postman.co/workspace/My-Workspace~106e6848-d561-46e1-87dd-8ab56407181c/collection/14306419-b5c6ee37-ff67-46b4-8906-97a3f0ffa4b1?action=share&source=collection_link&creator=14306419"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Add user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"nom\":\"Tsinjo\",\r\n        \"prenom\":\"ADR\",\r\n        \"email\":\"ads@gmail.com\",\r\n        \"password\":\"Testing202!\"\r\n    }\r\n}  ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/auth",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\":{\r\n        \"email\": \"darcyadr@gmail.com\",\r\n        \"password\":\"darcyadr!\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/auth/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Biens",
+			"item": [
+				{
+					"name": "Add Bien",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTJmZGQ5OTQ2YWJjOTY5NTgzNGVmYjkiLCJpYXQiOjE2OTc2MzU4ODIsImV4cCI6MTY5NzcyMjI4Mn0.Vn1E1xVtBegxDdfw7el4hY3iLVmdS-hy09JJCKRwPSM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"adressePostale\":\"II E 43 ssAmbohidahy\",\r\n    \"typeBien\":\"maison\", // maison ou appartement\r\n    \"loyer\":45000,\r\n    \"surface\":\"400\" // en m²\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/biens/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"biens",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Biens",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTJmZTBkNzk4NzI2OGExNTg3OWIyYTIiLCJpYXQiOjE2OTc2MzY1NzYsImV4cCI6MTY5NzcyMjk3Nn0.T9Y-sCLj0OkvlAWPEsspTqM4NpC4TCVWky8PeGDBdjU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/biens/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"biens",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Biens By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTMwMzE3Yzg2YThjNjAwMzVjMDE0YTMiLCJpYXQiOjE2OTc2NTc2MDYsImV4cCI6MTY5Nzc0NDAwNn0.cRCS4v_oP7yUjM-ScymvJs14KF7QqVvgHDogPw85yyU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/biens/6530390586a8c60035c014b1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"biens",
+								"6530390586a8c60035c014b1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Biens Paginate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTJmZGQ5OTQ2YWJjOTY5NTgzNGVmYjkiLCJpYXQiOjE2OTc2MzU4ODIsImV4cCI6MTY5NzcyMjI4Mn0.Vn1E1xVtBegxDdfw7el4hY3iLVmdS-hy09JJCKRwPSM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/biens/1/2",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"biens",
+								"1",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Bien",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTJmZGQ5OTQ2YWJjOTY5NTgzNGVmYjkiLCJpYXQiOjE2OTc2MzU4ODIsImV4cCI6MTY5NzcyMjI4Mn0.Vn1E1xVtBegxDdfw7el4hY3iLVmdS-hy09JJCKRwPSM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\":\"652fe05ff807cf6cf804b053\",\r\n    \"adressePostale\":\"Hssuhu\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/biens",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"biens"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Bien",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTJmZGQ5OTQ2YWJjOTY5NTgzNGVmYjkiLCJpYXQiOjE2OTc2MzU4ODIsImV4cCI6MTY5NzcyMjI4Mn0.Vn1E1xVtBegxDdfw7el4hY3iLVmdS-hy09JJCKRwPSM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/biens/652fe05ff807cf6cf804b053",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"biens",
+								"652fe05ff807cf6cf804b053"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Locataires",
+			"item": [
+				{
+					"name": "Add Locataire",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTMwMzE3Yzg2YThjNjAwMzVjMDE0YTMiLCJpYXQiOjE2OTc2NTc2MDYsImV4cCI6MTY5Nzc0NDAwNn0.cRCS4v_oP7yUjM-ScymvJs14KF7QqVvgHDogPw85yyU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nom\":\"Rakoto\",\r\n    \"prenom\":\"Zafy\",\r\n    \"email\":\"rakotdfsozafy@gmail.com\",\r\n    \"adressePostale\":\"652fe26fb2bf374e24c78a8e\",\r\n    \"telephone\":\"0340503027\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/locataires/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"locataires",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Locataires",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTMwMzE3Yzg2YThjNjAwMzVjMDE0YTMiLCJpYXQiOjE2OTc2NTc2MDYsImV4cCI6MTY5Nzc0NDAwNn0.cRCS4v_oP7yUjM-ScymvJs14KF7QqVvgHDogPw85yyU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/locataires/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"locataires",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Locataire By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTMxZTI3MTYwNjgzODAwMzUxMDUyNjkiLCJpYXQiOjE2OTc3NjgwNTgsImV4cCI6MTY5Nzg1NDQ1OH0.Pmil713uwqUABfUb3OHhMaz37tSWSihHr9mv2r--_BU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/locataires",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"locataires"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Locataires Paginate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTMxZTI3MTYwNjgzODAwMzUxMDUyNjkiLCJpYXQiOjE2OTc3NjgwNTgsImV4cCI6MTY5Nzg1NDQ1OH0.Pmil713uwqUABfUb3OHhMaz37tSWSihHr9mv2r--_BU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/locataires/1/2/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"locataires",
+								"1",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Locataire",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTJmZGQ5OTQ2YWJjOTY5NTgzNGVmYjkiLCJpYXQiOjE2OTc2MzU4ODIsImV4cCI6MTY5NzcyMjI4Mn0.Vn1E1xVtBegxDdfw7el4hY3iLVmdS-hy09JJCKRwPSM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\":\"6530f338529f334d548e4bc8\",\r\n    \"nom\":\"Rakoto\",\r\n    \"prenom\":\"Zafy\",\r\n    \"email\":\"rakotozafy@gmail.com\",\r\n    \"adressePostale\":\"652fe26fb2bf374e24c78a8e\",\r\n    \"telephone\":\"0340503027\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/locataires",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"locataires"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Locataire",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTJmZGQ5OTQ2YWJjOTY5NTgzNGVmYjkiLCJpYXQiOjE2OTc2MzU4ODIsImV4cCI6MTY5NzcyMjI4Mn0.Vn1E1xVtBegxDdfw7el4hY3iLVmdS-hy09JJCKRwPSM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/locataires/65302f72ce2d878c60cbfdaf",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"locataires",
+								"65302f72ce2d878c60cbfdaf"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Factures",
+			"item": [
+				{
+					"name": "Add Facture",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTJmZGQ5OTQ2YWJjOTY5NTgzNGVmYjkiLCJpYXQiOjE2OTc2MzU4ODIsImV4cCI6MTY5NzcyMjI4Mn0.Vn1E1xVtBegxDdfw7el4hY3iLVmdS-hy09JJCKRwPSM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dateQuittance\":\"12-06-2022\",\r\n    \"datePaiement\":\"18-06-2022\",\r\n    \"mois\":\"juin\",\r\n    \"bienId\":\"652fe26fb2bf374e24c78a8e\",\r\n    \"locataireId\":\"6530f338529f334d548e4bc8\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/factures/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"factures",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Factures",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTMxZTI3MTYwNjgzODAwMzUxMDUyNjkiLCJpYXQiOjE2OTc3NjgwNTgsImV4cCI6MTY5Nzg1NDQ1OH0.Pmil713uwqUABfUb3OHhMaz37tSWSihHr9mv2r--_BU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/factures/1/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"factures",
+								"1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Facture",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTJmZGQ5OTQ2YWJjOTY5NTgzNGVmYjkiLCJpYXQiOjE2OTc4MDExNTYsImV4cCI6MTY5Nzg4NzU1Nn0.R_GvIjvtJazV45iPbSL4qDpLMShM7NoAzC3TnVcRP30",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/factures/send/65312ecfd92d6daddcf08f5b",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"factures",
+								"send",
+								"65312ecfd92d6daddcf08f5b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate Facture",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTMxZTI3MTYwNjgzODAwMzUxMDUyNjkiLCJpYXQiOjE2OTc3NjgwNTgsImV4cCI6MTY5Nzg1NDQ1OH0.Pmil713uwqUABfUb3OHhMaz37tSWSihHr9mv2r--_BU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dateQuittance\":\"2022-06-12\",\r\n    \"datePaiement\":\"2022-06-18\",\r\n    \"mois\":\"juin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/factures/generate",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"factures",
+								"generate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "https://backend-locative-mada.onrender.com",
+			"type": "string"
+		}
+	]
+}
