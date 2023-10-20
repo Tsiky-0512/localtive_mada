@@ -49,7 +49,6 @@ function deleteBien(id) {
 
 // Récupérer tous les biens (GET)
 function getBiensPaginate(page, limit,userId) {
-    console.log("USER ID",userId);
     var aggregateQuery = Biens.aggregate([
         {
             $match: { proprietaireId: userId },

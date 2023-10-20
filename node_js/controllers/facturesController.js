@@ -48,4 +48,22 @@ const getFacturesPaginate = async (req, res) => {
     }
 }
 
-module.exports = { saveFacture , generateFacture,getFacturesPaginate };
+
+const sendFacture = async (req, res) => {
+    try {
+        console.log("ATOOOOO");
+        const factures = await facturesService.sendFacture(req.params.id);
+        res.status(200).json({
+            data: factures,
+            status: 200
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            data: error,
+            status: 400
+        })
+    }
+}
+
+module.exports = { saveFacture , generateFacture,getFacturesPaginate,sendFacture };

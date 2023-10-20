@@ -10,16 +10,6 @@ let transporter = nodemailer.createTransport(
     }
 );
 
-// Verification si l'email est prêt
-// transporter.verify((error,success) => {
-//     if (error) {
-//         console.log(error);
-//     }else{
-//         console.log("Ready from send Email");
-//         console.log(success);
-//     }
-// })
-
 const sendMail = async (email, subject, bodyFile) => {
     try {
         const mailOptions = {
@@ -141,33 +131,30 @@ const generateEmail = (body) => {
                 <h1>QUITTANCE DE LOYER</h1>
             </div>
             <div class="description-header">
-                <p>Corresspondant à la location du bien situé :  [adresse Postale]</p>
+                <p>Corresspondant à la location du bien situé :  ${body?.bienDetails?.adressePostale} </p>
             </div>
             <div class="invoice-details">
                 <h2>Bailleur</h2>
-                <p>[Nom] [Prénom]</p>
-                <p>[Adresse postale]</p>
-                <br>
-                <p>Tél : [Téléphone]</p>
-                <p>E-mail : [email]</p>
+                <p>${body?.bailleurDetails?.nom} ${body?.bailleurDetails?.prenom}</p>
+                <p>email : ${body?.bailleurDetails?.email}</p>
                 <br>
                 <h2>Locataire</h2>
-                <p>[Nom] [Prénom]</p>
-                <p>[Adresse Postale]</p>
+                <p>${body?.locataireDetails?.nom} ${body?.locataireDetails?.prenom}</p>
+                <p>${body?.bienDetails?.adressePostale}</p>
                 <div class="date-table-container">
                     <table class="date-table">
                         <tbody class="">
                             <tr>
                                 <td class="header-table">Date de quittance</td>
-                                <td>2dedee</td>
+                                <td>${body?.dateQuittance}</td>
                             </tr>
                             <tr>
                                 <td class="header-table">Date de paiement</td>
-                                <td>2</td>
+                                <td>${body?.datePaiement}</td>
                             </tr>
                             <tr>
                                 <td class="header-table">Mois de location</td>
-                                <td>2</td>
+                                <td>${body?.mois}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -180,23 +167,15 @@ const generateEmail = (body) => {
                 <thead>
                     <tr>
                         <th>Description</th>
-                        <th>Quantity</th>
-                        <th>Unit Price</th>
-                        <th>Total</th>
+                        <th>Paiement</th>
+                        <th>Loyer</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Product A</td>
-                        <td>2</td>
-                        <td>$50.00</td>
-                        <td>$100.00</td>
-                    </tr>
-                    <tr>
-                        <td>Product B</td>
-                        <td>3</td>
-                        <td>$30.00</td>
-                        <td>$90.00</td>
+                        <td>Loyer</td>
+                        <td>Virement</td>
+                        <td>${body?.bienDetails?.loyer}</td>
                     </tr>
                 </tbody>
             </table>    
@@ -211,19 +190,19 @@ const generateEmail = (body) => {
                         <tbody class="">
                             <tr>
                                 <td class="header-table">Loyer hors charges à payer</td>
-                                <td>2dedee</td>
+                                <td>${body?.bienDetails?.loyer}</td>
                             </tr>
                             <tr>
                                 <td class="header-table">TVA 20%</td>
-                                <td>2</td>
+                                <td>${body?.bienDetails?.loyer *0.2}</td>
                             </tr>
                             <tr>
                                 <td class="header-table">Total à payer</td>
-                                <td>2</td>
+                                <td>${body?.bienDetails?.loyer + (body?.bienDetails?.loyer *0.2)}</td>
                             </tr>
                             <tr>
                                 <td class="header-table">Montant à payer</td>
-                                <td>2</td>
+                                <td>${body?.bienDetails?.loyer + (body?.bienDetails?.loyer *0.2)}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -233,7 +212,7 @@ const generateEmail = (body) => {
             
             
             <div class="invoice-total">
-                <p>[Bailler Nom]</p>
+                <p>${body?.bailleurDetails?.nom}</p>
             </div>
         </div>
     </body>
@@ -241,9 +220,9 @@ const generateEmail = (body) => {
     `
 }
 
-const sendInviteEmail = async (user, vote) => {
+const sendInviteEmail = async (body, email) => {
     try {
-        return await sendMail(user?.email, 'Invitation à voter', generateEmail(user, vote));
+        return await sendMail(email, 'Quittance de loyer', generateEmail(body));
     } catch (error) {
         throw error;
     }

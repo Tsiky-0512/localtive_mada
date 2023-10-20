@@ -23,6 +23,7 @@ const locataireSchema = Schema({
     adressePostale: {
         type: Schema.Types.ObjectId,
         ref: 'Biens',
+        required: true
     },
     telephone: { type: String, required: true },
 });

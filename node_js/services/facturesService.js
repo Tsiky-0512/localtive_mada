@@ -1,5 +1,8 @@
 let Factures = require('../models/factures');
 const locatairesService = require("./locatairesService");
+const mailService = require("./mailService");
+const mongoose = require("mongoose");
+
 
 
 
@@ -102,9 +105,71 @@ function getFacturesPaginate(page, limit, userId) {
     })
 }
 
-// Envoyer email de la facture 
-function sendFacture(idFacture) {
+// getFatcure By Id
+function getFacturesById(id) {
+    console.log(id);
+    var aggregateQuery = [
+            {
+                '$match': {
+                    '_id': mongoose.Types.ObjectId(id)
+                }
+            },
+            {
+                '$lookup': {
+                    'from': 'users',
+                    'localField': 'bailleurId',
+                    'foreignField': '_id',
+                    'as': 'bailleurDetails'
+                }
+            }, {
+                '$unwind': {
+                    'path': '$bailleurDetails'
+                }
+            }, {
+                '$lookup': {
+                    'from': 'biens',
+                    'localField': 'bienId',
+                    'foreignField': '_id',
+                    'as': 'bienDetails'
+                }
+            }, {
+                '$unwind': {
+                    'path': '$bienDetails'
+                }
+            }, {
+                '$lookup': {
+                    'from': 'locataires',
+                    'localField': 'locataireId',
+                    'foreignField': '_id',
+                    'as': 'locataireDetails'
+                }
+            }, {
+                '$unwind': {
+                    'path': '$locataireDetails'
+                }
+            }
+        ];
+    return new Promise((resolve, reject) => {
+        Factures.aggregate(aggregateQuery,
+            (err, factures) => {
+                if (err) {
+                    reject(err);
+                    console.log(err);
+                }
+                resolve(factures);
+            }
+        );
+    })
+}
 
+// Envoyer email de la facture 
+async function sendFacture(idFacture) {
+    const facture = await getFacturesById(idFacture);
+    let result = false;
+    if (facture[0]) {
+        result =  await mailService.sendInviteEmail(facture[0],facture[0]?.locataireDetails?.email);        
+    }
+    return result;
 }
 
 
