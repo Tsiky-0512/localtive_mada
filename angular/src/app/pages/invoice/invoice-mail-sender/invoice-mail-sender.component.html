@@ -1,0 +1,22 @@
+<c-card>
+  <c-card-header>
+    <h1 class="mb-0">Envoie de factures par email.</h1>
+  </c-card-header>
+  <c-card-body>
+    <app-paginated-table
+      [titles]="titles"
+      [getters]="getters"
+      [data]="data"
+      [actions]="actions"
+      [count]="count"
+      [pageSize]="10"
+      [showCheckBox]="true"
+      (page)="find($event)"
+      (emitChecked)="registerCheckedList($event)"
+    />
+  </c-card-body>
+  <c-card-footer>
+    <button mat-raised-button color="primary" (click)="send()" >Envoyer</button>
+  </c-card-footer>
+</c-card>
+<br>

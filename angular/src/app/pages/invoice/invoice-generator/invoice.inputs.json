@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Date quittance",
+    "controlName": "dateQuittance",
+    "type": "date",
+    "constraintList": ["required"]
+  },
+  {
+    "label": "Date paiement",
+    "controlName": "datePaiement",
+    "type": "date",
+    "constraintList": ["required"]
+  },
+  {
+    "label": "Année",
+    "controlName": "year",
+    "type": "number",
+    "constraintList": ["min", "max","required"]
+  },
+  {
+    "label": "Mois",
+    "controlName": "mois",
+    "type": "number",
+    "constraintList": ["min", "max","required"]
+  }
+]

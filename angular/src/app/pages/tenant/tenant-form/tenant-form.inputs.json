@@ -1,0 +1,22 @@
+[
+  {
+    "label": "Nom",
+    "controlName": "nom",
+    "constraintList": ["required"]
+  },
+  {
+    "label": "Prénom",
+    "controlName": "prenom",
+    "constraintList": ["required"]
+  },
+  {
+    "label": "Email",
+    "controlName": "email",
+    "constraintList": ["required"]
+  },
+  {
+    "label": "Télephone",
+    "controlName": "telephone",
+    "constraintList": ["required"]
+  }
+]

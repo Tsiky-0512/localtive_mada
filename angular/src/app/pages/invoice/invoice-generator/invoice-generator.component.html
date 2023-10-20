@@ -1,0 +1,31 @@
+<c-card class="mb-4">
+  <c-card-header>
+    <h1 class="mb-0">Générateur de facture</h1>
+  </c-card-header>
+  <c-card-body>
+    <div class="container">
+      <form [formGroup]="form" class="form">
+
+        <ng-container *ngFor="let input of inputs">
+          <div class="c-row">
+            <div class="c-col-12 mb-2">
+              <app-input
+                [label]="input.label"
+                [form]="form"
+                [type]="input.type"
+                [controlName]="input.controlName"
+                [constraintList]="input.constraintList"
+              />
+            </div>
+          </div>
+        </ng-container>
+
+        <div class="c-row">
+          <div class="c-col-12">
+            <button mat-raised-button color="primary"  (click)="validate()">Générer</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </c-card-body>
+</c-card>

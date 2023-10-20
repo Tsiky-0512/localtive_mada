@@ -1,0 +1,42 @@
+<c-card class="mb-4">
+    <c-card-header>
+        <h1 class="mb-0">{{mode.title}}</h1>
+    </c-card-header>
+    <c-card-body>
+        <div class="container">
+            <form [formGroup]="form" class="form">
+                <div class="c-row">
+                    <div class="c-col-12 mb-2">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Type</mat-label>
+                            <mat-select formControlName="typeBien">
+                                <mat-option value="maison">Maison</mat-option>
+                                <mat-option value="appartement">Appartement</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="form.get('typeBien')?.hasError('required')">{{errorMessages["required"]}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <ng-container *ngFor="let input of inputs">
+                    <div class="c-row">
+                        <div class="c-col-12 mb-2">
+                            <app-input
+                                [label]="input.label"
+                                [form]="form"
+                                [controlName]="input.controlName"
+                                [constraintList]="input.constraintList"
+                            />
+                        </div>
+                    </div>
+                </ng-container>
+
+                <div class="c-row">
+                    <div class="c-col-12">
+                        <button mat-raised-button color="primary"  (click)="validate()">{{mode.buttonText}}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </c-card-body>
+</c-card>

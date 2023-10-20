@@ -1,0 +1,11 @@
+<div [formGroup]="form">
+    <mat-form-field appearance="outline">
+        <mat-label>{{label}}</mat-label>
+        <input matInput [type]="type" [formControlName]="controlName">
+            <mat-error>
+                <ng-container *ngFor="let constraint of constraintList">
+                    <span *ngIf="form.get(controlName)?.hasError(constraint)" >{{errorMessages[constraint]}}</span>
+                </ng-container>
+            </mat-error>
+    </mat-form-field>
+</div>

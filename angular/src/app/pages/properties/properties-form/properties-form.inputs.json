@@ -1,0 +1,17 @@
+[
+  {
+    "label": "Loyer",
+    "controlName": "loyer",
+    "constraintList": ["min", "required"]
+  },
+  {
+    "label": "Surface(m2)",
+    "controlName": "surface",
+    "constraintList": ["min", "required"]
+  },
+  {
+    "label": "Adresse postale",
+    "controlName": "adressePostale",
+    "constraintList": ["required"]
+  }
+]

@@ -1,0 +1,50 @@
+<div class="bg-light min-vh-100 d-flex flex-row align-items-center">
+  <c-container>
+    <c-row class="justify-content-center">
+      <c-col md="4">
+        <c-card-group>
+          <c-card class="p-4">
+            <c-card-body>
+              <form cForm [formGroup]="form">
+                <h1 class="mb-4">Se connecter</h1>
+                <c-input-group class="mb-3">
+                  <span cInputGroupText>
+                    <svg cIcon name="cilUser"></svg>
+                  </span>
+                  <input
+                    autoComplete="username"
+                    formControlName="email"
+                    cFormControl
+                    placeholder="Email"
+                  />
+                </c-input-group>
+                <c-input-group class="mb-4">
+                  <span cInputGroupText>
+                    <svg cIcon name="cilLockLocked"></svg>
+                  </span>
+                  <input
+                    autoComplete="current-password"
+                    cFormControl
+                    placeholder="Mot de passe"
+                    formControlName="password"
+                    type="password"
+                  />
+                </c-input-group>
+                <c-row>
+                  <c-col class="d-flex justify-content-between">
+                    <button cButton class="px-4" color="primary" (click)="doLogin()">
+                      Se connecter
+                    </button>
+                    <button [active]="true" cButton color="primary" routerLink="/user/register">
+                      Créer un compte
+                    </button>
+                  </c-col>
+                </c-row>
+              </form>
+            </c-card-body>
+          </c-card>
+        </c-card-group>
+      </c-col>
+    </c-row>
+  </c-container>
+</div>
