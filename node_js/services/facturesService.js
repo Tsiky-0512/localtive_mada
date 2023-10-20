@@ -15,6 +15,7 @@ function saveFacture(factureBody, userId) {
     facture.bailleurId = userId;
     facture.bienId = factureBody.bienId;
     facture.locataireId = factureBody.locataireId;
+    facture.loyer = factureBody.loyer;
 
     return new Promise((resolve, reject) => {
         facture.save((err) => {
@@ -38,6 +39,7 @@ async function generateFacture(body, userId) {
                     mois: body.mois,
                     locataireId: locataire?._id,
                     bienId: locataire?.adressePostale?._id,
+                    loyer: locataire?.adressePostale?.loyer,
                 }
                 await saveFacture(factureBody, userId);
             }

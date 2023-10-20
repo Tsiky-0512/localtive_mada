@@ -6,6 +6,7 @@ const facturesSchema = Schema({
     dateQuittance: { type: Date, required: true},
     datePaiement: { type: Date, required: true},
     mois: { type: String, required: true},   
+    loyer: { type: Number, required: true} ,
     bailleurId: {
         type: Schema.Types.ObjectId,
         ref: 'users',

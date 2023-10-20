@@ -175,7 +175,7 @@ const generateEmail = (body) => {
                     <tr>
                         <td>Loyer</td>
                         <td>Virement</td>
-                        <td>${body?.bienDetails?.loyer}</td>
+                        <td>${body?.loyer}</td>
                     </tr>
                 </tbody>
             </table>    
@@ -190,19 +190,19 @@ const generateEmail = (body) => {
                         <tbody class="">
                             <tr>
                                 <td class="header-table">Loyer hors charges à payer</td>
-                                <td>${body?.bienDetails?.loyer}</td>
+                                <td>${body?.loyer}</td>
                             </tr>
                             <tr>
                                 <td class="header-table">TVA 20%</td>
-                                <td>${body?.bienDetails?.loyer *0.2}</td>
+                                <td>${body?.loyer *0.2}</td>
                             </tr>
                             <tr>
                                 <td class="header-table">Total à payer</td>
-                                <td>${body?.bienDetails?.loyer + (body?.bienDetails?.loyer *0.2)}</td>
+                                <td>${body?.loyer + (body?.loyer *0.2)}</td>
                             </tr>
                             <tr>
                                 <td class="header-table">Montant à payer</td>
-                                <td>${body?.bienDetails?.loyer + (body?.bienDetails?.loyer *0.2)}</td>
+                                <td>${body?.loyer + (body?.loyer *0.2)}</td>
                             </tr>
                         </tbody>
                     </table>
